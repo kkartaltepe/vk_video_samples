@@ -827,7 +827,7 @@ private:
     void sliding_window_decoded_reference_picture_marking(uint32_t num_ref_frames);
     void adaptive_memory_control_decoded_reference_picture_marking(slice_header_s *slh, int num_ref_frames);
     int dpb_fullness();
-    bool dpb_full() { int fullness = dpb_fullness(); return ((fullness > 0) && (fullness >= m_MaxDpbSize)); }
+    bool dpb_full() { int fullness = dpb_fullness(); return ((fullness > 0) && (fullness >= m_MaxDpbSize - 1)); }
     bool dpb_empty() { return (dpb_fullness() == 0); }
     void dpb_bumping(int DpbSize=MAX_DPB_SIZE);
     int dpb_reordering_delay();

@@ -235,7 +235,7 @@ void Shell::ResizeSwapchain(uint32_t width_hint, uint32_t height_hint) {
     uint32_t image_count = m_settings.backBufferCount;
     if (image_count < caps.minImageCount)
         image_count = caps.minImageCount;
-    else if (image_count > caps.maxImageCount)
+    else if (caps.maxImageCount && image_count > caps.maxImageCount)
         image_count = caps.maxImageCount;
 
     assert(caps.supportedUsageFlags & VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT);
@@ -250,12 +250,14 @@ void Shell::ResizeSwapchain(uint32_t width_hint, uint32_t height_hint) {
 
     // FIFO is the only mode universally supported
     VkPresentModeKHR mode = VK_PRESENT_MODE_FIFO_KHR;
+	/*
     for (auto m : modes) {
         if ((m_settings.vsync && m == VK_PRESENT_MODE_MAILBOX_KHR) || (!m_settings.vsync && m == VK_PRESENT_MODE_IMMEDIATE_KHR)) {
             mode = m;
             break;
         }
     }
+	*/
 
     VkSwapchainCreateInfoKHR swapchain_info = {};
     swapchain_info.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
